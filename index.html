@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/leaf.png" type="image/x-icon" />
+
+  <!-- Remix Icon CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Tailwind CSS Output File -->
+  <link rel="stylesheet" href="./output.css" />
+
+  <title>Plant Website || TailwindCSS</title>
+
+  <style>
+    /* Modal background overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+    /* Modal content container */
+    .modal-content {
+      background: #1e293b; /* Tailwind slate-800 */
+      border-radius: 0.75rem;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      color: white;
+      position: relative;
+    }
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #facc15; /* Tailwind yellow-400 */
+    }
+  </style>
+</head>
+
+<body class="bg-green-950 text-white">
+  <!-- Header -->
+  <header id="navbar" class="bg-green-950 fixed w-full top-0 left-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between h-16 sm:h-20 px-4">
+      <div class="font-Lobster text-white sm:text-3xl">Indoor Plants</div>
+
+      <div
+        id="nav-menu"
+        class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-green-950/80 backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:left-0 lg:w-auto lg:min-h-fit"
+      >
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+          <li>
+            <a href="#home" class="nav-link text-white flex items-center gap-2">
+              <i class="ri-home-line"></i> Home
+            </a>
+          </li>
+          <li>
+            <button
+              data-modal="aboutModal"
+              class="modal-trigger text-white flex items-center gap-2 bg-transparent border-none cursor-pointer"
+            >
+              <i class="ri-information-line"></i> About
+            </button>
+          </li>
+          <li>
+            <button
+              data-modal="popularModal"
+              class="modal-trigger text-white flex items-center gap-2 bg-transparent border-none cursor-pointer"
+            >
+              <i class="ri-fire-line"></i> Popular
+            </button>
+          </li>
+          <li>
+            <button
+              data-modal="reviewModal"
+              class="modal-trigger text-white flex items-center gap-2 bg-transparent border-none cursor-pointer"
+            >
+              <i class="ri-chat-3-line"></i> Review
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Hamburger Icon -->
+      <div class="text-xl sm:text-3xl text-white cursor-pointer z-50" id="hamburger">
+        <i class="ri-menu-4-line"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mt-20">
+    <!-- Home Section (always visible) -->
+    <section
+      id="home"
+      class="relative min-h-screen flex flex-col md:flex-row items-center justify-between px-8 py-20 gap-10 overflow-hidden"
+    >
+      <!-- Decorative Blobs -->
+      <div
+        class="absolute w-72 h-72 bg-green-700 rounded-full blur-3xl opacity-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10"
+      ></div>
+      <div
+        class="absolute w-64 h-64 bg-yellow-500 rounded-full blur-2xl opacity-30 top-10 left-10 -z-10"
+      ></div>
+      <div
+        class="absolute w-72 h-72 bg-green-600 rounded-full blur-2xl opacity-30 bottom-10 right-10 -z-10"
+      ></div>
+
+      <!-- Text Content -->
+      <div class="max-w-xl space-y-6 lg:w-1/2">
+        <h1 class="text-4xl font-bold text-white leading-tight">
+          <span class="text-yellow-500">Plants</span> make a<br />
+          positive <span class="text-yellow-500">impact</span> on <br />
+          your environment
+        </h1>
+
+        <p class="max-w-lg text-slate-300 font-Lobster">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio fugiat eveniet, reprehenderit veritatis aut explicabo voluptatum ullam itaque tenetur numquam!
+        </p>
+
+        <div class="flex space-x-4">
+          <button
+            class="flex items-center gap-2 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+          >
+            <span>Shop Now</span>
+            <i class="ri-leaf-line"></i>
+          </button>
+
+          <button
+            class="flex items-center gap-2 bg-yellow-500 text-green-900 px-4 py-2 rounded hover:bg-yellow-600 transition"
+          >
+            <span>Know More</span>
+            <i class="ri-leaf-line"></i>
+          </button>
+        </div>
+
+        <p class="text-gray-300 text-sm font-Lobster">You will get 30-days free trial.</p>
+
+        <div class="flex items-center gap-8 text-2xl text-green-300 mt-4">
+          <i class="ri-facebook-fill cursor-pointer hover:text-blue-600 transition"></i>
+          <i class="ri-twitter-x-line cursor-pointer hover:text-sky-500 transition"></i>
+          <i class="ri-instagram-line cursor-pointer hover:text-pink-500 transition"></i>
+          <i class="ri-linkedin-fill cursor-pointer hover:text-blue-700 transition"></i>
+        </div>
+      </div>
+
+      <!-- Image with Decorative Icons -->
+      <div class="relative lg:w-1/2 flex justify-center items-center">
+        <img
+          src="assets/OIP-removebg-preview.png"
+          alt="home_image"
+          class="w-full max-w-sm object-contain z-10"
+        />
+
+        <div class="absolute -top-5 left-5 animate-movingY opacity-40">
+          <i class="ri-leaf-line text-4xl text-yellow-500"></i>
+        </div>
+        <div class="absolute bottom-0 right-5 animate-movingY opacity-40 delay-100 animate-rotating">
+          <i class="ri-flower-line text-5xl text-yellow-500"></i>
+        </div>
+        <div
+          class="absolute top-1/2 left-0 transform -translate-y-1/2 animate-movingY opacity-40 delay-200 lg:block animate-scalingUp"
+        >
+          <i class="ri-plant-line text-4xl text-yellow-500"></i>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals for About, Popular, Review -->
+
+  <!-- About Modal -->
+  <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close About Section">&times;</button>
+      <h2 id="aboutTitle" class="text-4xl font-bold mb-6 text-yellow-400 text-center">About Us</h2>
+      <p class="text-slate-300 max-w-3xl mx-auto">
+        We are passionate about bringing nature indoors. Our mission is to provide a variety of healthy, beautiful indoor plants that improve your home environment and wellness.
+      </p>
+    </div>
+  </div>
+
+  <!-- Popular Modal -->
+  <div id="popularModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="popularTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Popular Section">&times;</button>
+      <h2 id="popularTitle" class="text-4xl font-bold mb-6 text-yellow-400 text-center">Popular Plants</h2>
+      <p class="text-slate-300 max-w-3xl mx-auto text-center mb-12">
+        Discover our best-selling indoor plants that are loved for their beauty, ease of care, and air-purifying qualities.
+      </p>
+      <div class="grid gap-6 max-w-4xl mx-auto sm:grid-cols-2">
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Snake Plant (Sansevieria)</h3>
+          <p class="text-slate-200 text-sm">A hardy plant known for its upright, sword-like leaves. It tolerates low light and improves indoor air quality.</p>
+        </div>
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Spider Plant (Chlorophytum comosum)</h3>
+          <p class="text-slate-200 text-sm">A resilient, fast-growing plant with arching leaves and baby “spiderettes” perfect for hanging baskets.</p>
+        </div>
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Peace Lily (Spathiphyllum)</h3>
+          <p class="text-slate-200 text-sm">Known for its beautiful white blooms and ability to thrive in low light while purifying the air.</p>
+        </div>
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Monstera Deliciosa</h3>
+          <p class="text-slate-200 text-sm">Famous for its large, split leaves and tropical look, it adds an exotic vibe to any room.</p>
+        </div>
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Aloe Vera</h3>
+          <p class="text-slate-200 text-sm">A succulent plant with medicinal uses, known for its thick, fleshy leaves and easy care.</p>
+        </div>
+        <div class=" p-4 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-2">Pothos (Epipremnum aureum)</h3>
+          <p class="text-slate-200 text-sm">An adaptable trailing vine with heart-shaped leaves, perfect for shelves and hanging pots.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="reviewTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Review Section">&times;</button>
+      <h2 id="reviewTitle" class="text-4xl font-bold mb-6 text-yellow-400 text-center">Customer Reviews</h2>
+      <p class="text-slate-300 max-w-3xl mx-auto">
+        "I love the selection and quality of plants here! The snake plant I bought has thrived for months."
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      if (navMenu.style.left === '0px' || navMenu.style.left === '0%') {
+        navMenu.style.left = '-100%';
+      } else {
+        navMenu.style.left = '0';
+      }
+    });
+
+    // Modal logic
+    const modalTriggers = document.querySelectorAll('.modal-trigger');
+    const modals = document.querySelectorAll('.modal-overlay');
+
+    modalTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const modalId = trigger.getAttribute('data-modal');
+        document.getElementById(modalId).style.display = 'block';
+        // Close menu if open (for mobile)
+        navMenu.style.left = '-100%';
+      });
+    });
+
+    modals.forEach((modal) => {
+      const closeBtn = modal.querySelector('.modal-close');
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      // Close modal on outside click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
